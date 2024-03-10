@@ -31,7 +31,7 @@ WORKDIR /app
 COPY --from=publish /app/publish .
 
 # Copy the CSS files to the wwwroot/css directory in the container
-COPY wwwroot/css /app/wwwroot/css
+COPY wwwroot/app.css /app/wwwroot/app.css
 
 # Expose the port
 EXPOSE 8080
