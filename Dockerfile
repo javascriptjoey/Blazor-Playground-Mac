@@ -23,7 +23,7 @@ WORKDIR /app
 COPY --from=build /app/build .
 
 # Expose the port
-EXPOSE 80
+EXPOSE 8080
 
 # Define the entry point
 ENTRYPOINT ["dotnet", "Blazor-Playground-Mac.dll", "--port", "8080"]
