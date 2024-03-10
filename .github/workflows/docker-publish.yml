@@ -30,4 +30,4 @@ jobs:
           context: .
           file: Dockerfile
           push: true
-          tags: blazor-playground-mac:latest
+          tags: afterrelm:firstimage

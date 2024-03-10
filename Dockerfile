@@ -1,4 +1,4 @@
-# Use the official SDK image as a build stage
+# Use the official SDK image as a build stage, 
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 
 # Set the working directory in the container
@@ -26,4 +26,4 @@ COPY --from=build /app/build .
 EXPOSE 80
 
 # Define the entry point
-ENTRYPOINT ["dotnet", "Blazor-Playground-Mac.dll"]
+ENTRYPOINT ["dotnet", "Blazor-Playground-Mac.dll", "--port", "8080"]
