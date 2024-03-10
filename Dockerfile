@@ -5,11 +5,19 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /app
 
 # Copy the project files into the container
+COPY *.csproj .
+RUN dotnet restore
+
+# Copy the remaining source code
 COPY . .
 
 # Build the application inside the container
 RUN dotnet restore
 RUN dotnet build -c Release -o /app/build
+
+# Publish the application
+FROM build AS publish
+RUN dotnet publish -c Release -o /app/publish
 
 # Run tests (replace with your actual test commands)
 # RUN dotnet test
@@ -20,7 +28,10 @@ RUN dotnet build -c Release -o /app/build
 # Build a smaller runtime image
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS runtime
 WORKDIR /app
-COPY --from=build /app/build .
+COPY --from=publish /app/publish .
+
+# Copy the CSS files to the wwwroot/css directory in the container
+COPY wwwroot/css /app/wwwroot/css
 
 # Expose the port
 EXPOSE 8080
